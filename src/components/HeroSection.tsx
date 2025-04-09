@@ -71,7 +71,7 @@ export default function HeroSection() {
       <div className="container-custom">
         <div ref={textRef} className="max-w-4xl mx-auto text-center">
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6">
-            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600 glow-text">Hi, I'm</span>
+            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600 dark:text-white glow-text">Hi, I'm</span>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500 inline-block min-h-[1.5em] glow-text">
               {displayText}
               <span className="animate-pulse">|</span>
@@ -101,7 +101,7 @@ export default function HeroSection() {
       <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
       
       {/* Add glow effect animation style */}
-      <style jsx>{`
+      <style>{`
         .glow-text {
           text-shadow: 0 0 15px rgba(139, 92, 246, 0.5), 0 0 30px rgba(139, 92, 246, 0.3);
           animation: pulse-glow 3s infinite alternate;
