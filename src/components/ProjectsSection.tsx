@@ -1,10 +1,14 @@
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink, Github, Code, Monitor, Layers, Smartphone } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
 gsap.registerPlugin(ScrollTrigger);
+
+type ProjectCategory = "All" | "Website" | "Software Solutions" | "Android Development";
 
 interface Project {
   title: string;
@@ -13,6 +17,7 @@ interface Project {
   image: string;
   githubUrl: string;
   liveUrl: string;
+  category: ProjectCategory | Exclude<ProjectCategory, "All">;
 }
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
@@ -47,7 +52,12 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         </div>
       </div>
       <div className="p-6 flex-grow">
-        <h3 className="text-xl font-bold mb-2">{project.title}</h3>
+        <div className="flex justify-between items-start mb-2">
+          <h3 className="text-xl font-bold">{project.title}</h3>
+          <Badge variant="outline" className="bg-primary/10">
+            {project.category}
+          </Badge>
+        </div>
         <p className="text-muted-foreground mb-4">{project.description}</p>
         <div className="flex flex-wrap gap-2 mb-4">
           {project.tags.map((tag, i) => (
@@ -84,9 +94,98 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   );
 }
 
+const FilterButton = ({ 
+  active, 
+  onClick, 
+  icon, 
+  children 
+}: { 
+  active: boolean; 
+  onClick: () => void; 
+  icon: React.ReactNode;
+  children: React.ReactNode;
+}) => (
+  <Button
+    variant={active ? "default" : "outline"}
+    className={`rounded-full px-4 transition-all ${active ? "shadow-md" : ""}`}
+    onClick={onClick}
+  >
+    {icon}
+    <span>{children}</span>
+  </Button>
+);
+
 export default function ProjectsSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
+  const [activeFilter, setActiveFilter] = useState<ProjectCategory>("All");
+  
+  const projects: Project[] = [
+    {
+      title: "E-Commerce Platform",
+      description:
+        "A full-featured online store with cart, checkout, and payment processing functionality.",
+      tags: ["React", "Node.js", "MongoDB", "Stripe"],
+      image: "",
+      githubUrl: "#",
+      liveUrl: "#",
+      category: "Website",
+    },
+    {
+      title: "Task Management App",
+      description:
+        "A productivity tool for teams to organize projects, assign tasks, and track progress.",
+      tags: ["Vue.js", "Firebase", "Tailwind CSS"],
+      image: "",
+      githubUrl: "#",
+      liveUrl: "#",
+      category: "Software Solutions",
+    },
+    {
+      title: "Fitness Tracker",
+      description:
+        "An application to record workouts, track progress, and visualize fitness data.",
+      tags: ["React Native", "GraphQL", "TypeScript"],
+      image: "",
+      githubUrl: "#",
+      liveUrl: "#",
+      category: "Android Development",
+    },
+    {
+      title: "Portfolio Website",
+      description:
+        "A modern, responsive personal portfolio showcasing work, skills, and contact details.",
+      tags: ["React", "Tailwind CSS", "GSAP", "Vite"],
+      image: "",
+      githubUrl: "#",
+      liveUrl: "#",
+      category: "Website",
+    },
+    {
+      title: "Data Visualization Dashboard",
+      description:
+        "An interactive dashboard with charts and graphs for analyzing business performance.",
+      tags: ["React", "D3.js", "Node.js", "Material UI"],
+      image: "",
+      githubUrl: "#",
+      liveUrl: "#",
+      category: "Software Solutions",
+    },
+    {
+      title: "Inventory Management App",
+      description:
+        "A mobile application for tracking inventory, scanning barcodes, and managing orders.",
+      tags: ["Kotlin", "Firebase", "SQLite", "Android SDK"],
+      image: "",
+      githubUrl: "#",
+      liveUrl: "#",
+      category: "Android Development",
+    },
+  ];
+
+  const filteredProjects = activeFilter === "All"
+    ? projects
+    : projects.filter(project => project.category === activeFilter);
 
   useEffect(() => {
     if (!sectionRef.current || !titleRef.current) return;
@@ -106,36 +205,6 @@ export default function ProjectsSection() {
     });
   }, []);
 
-  const projects: Project[] = [
-    {
-      title: "E-Commerce Platform",
-      description:
-        "A full-featured online store with cart, checkout, and payment processing functionality.",
-      tags: ["React", "Node.js", "MongoDB", "Stripe"],
-      image: "",
-      githubUrl: "#",
-      liveUrl: "#",
-    },
-    {
-      title: "Task Management App",
-      description:
-        "A productivity tool for teams to organize projects, assign tasks, and track progress.",
-      tags: ["Vue.js", "Firebase", "Tailwind CSS"],
-      image: "",
-      githubUrl: "#",
-      liveUrl: "#",
-    },
-    {
-      title: "Fitness Tracker",
-      description:
-        "An application to record workouts, track progress, and visualize fitness data.",
-      tags: ["React Native", "GraphQL", "TypeScript"],
-      image: "",
-      githubUrl: "#",
-      liveUrl: "#",
-    },
-  ];
-
   return (
     <section
       id="projects"
@@ -143,18 +212,49 @@ export default function ProjectsSection() {
       className="section bg-secondary/30 dark:bg-secondary/10"
     >
       <div className="container-custom">
-        <div ref={titleRef} className="text-center mb-12">
+        <div ref={titleRef} className="text-center mb-8">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Featured Projects
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-muted-foreground max-w-2xl mx-auto mb-6">
             Here are some of my recent projects that showcase my skills and
             problem-solving abilities.
           </p>
+          
+          <div className="flex flex-wrap justify-center gap-3 mb-10">
+            <FilterButton
+              active={activeFilter === "All"}
+              onClick={() => setActiveFilter("All")}
+              icon={<Layers size={16} className="mr-1" />}
+            >
+              All
+            </FilterButton>
+            <FilterButton
+              active={activeFilter === "Website"}
+              onClick={() => setActiveFilter("Website")}
+              icon={<Monitor size={16} className="mr-1" />}
+            >
+              Website
+            </FilterButton>
+            <FilterButton
+              active={activeFilter === "Software Solutions"}
+              onClick={() => setActiveFilter("Software Solutions")}
+              icon={<Code size={16} className="mr-1" />}
+            >
+              Software Solutions
+            </FilterButton>
+            <FilterButton
+              active={activeFilter === "Android Development"}
+              onClick={() => setActiveFilter("Android Development")}
+              icon={<Smartphone size={16} className="mr-1" />}
+            >
+              Android Development
+            </FilterButton>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
+          {filteredProjects.map((project, index) => (
             <ProjectCard key={index} project={project} index={index} />
           ))}
         </div>
