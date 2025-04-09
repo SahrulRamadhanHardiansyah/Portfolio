@@ -38,15 +38,15 @@ export default function Navbar() {
           : "py-5"
       }`}
     >
-      <div className="container-custom flex justify-between items-center">
-        <div className="font-bold text-xl">
+      <div className="container-custom flex flex-col md:flex-row justify-between items-center">
+        <div className="font-bold text-xl mb-3 md:mb-0">
           <a href="#home" className="flex items-center">
             <span className="text-primary">Portfolio</span>
           </a>
         </div>
 
-        {/* Desktop Nav */}
-        <div className="hidden md:flex space-x-8">
+        {/* Desktop Nav - Now centered */}
+        <div className="hidden md:flex space-x-8 mx-auto">
           {navLinks.map((link) => (
             <a
               key={link.name}
@@ -58,9 +58,14 @@ export default function Navbar() {
           ))}
         </div>
 
+        {/* Theme Toggle - Move to the right */}
+        <div className="hidden md:block">
+          <ThemeToggle />
+        </div>
+
         {/* Mobile Nav Button */}
         <button
-          className="md:hidden text-primary focus:outline-none"
+          className="md:hidden text-primary focus:outline-none absolute right-4 top-4"
           onClick={toggleMenu}
           aria-label="Toggle menu"
         >
@@ -85,10 +90,9 @@ export default function Navbar() {
               {link.name}
             </a>
           ))}
+          <ThemeToggle />
         </div>
       </div>
-
-      <ThemeToggle />
     </nav>
   );
 }

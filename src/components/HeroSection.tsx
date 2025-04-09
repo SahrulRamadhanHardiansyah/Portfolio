@@ -1,12 +1,33 @@
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ArrowDown } from "lucide-react";
 
 export default function HeroSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
+  const [displayText, setDisplayText] = useState("");
+  const fullName = "John Doe";
 
+  // Typing effect
+  useEffect(() => {
+    let currentIndex = 0;
+    const typingInterval = setInterval(() => {
+      if (currentIndex <= fullName.length) {
+        setDisplayText(fullName.substring(0, currentIndex));
+        currentIndex++;
+      } else {
+        // Reset and start again after a pause
+        setTimeout(() => {
+          currentIndex = 0;
+        }, 2000);
+      }
+    }, 150);
+
+    return () => clearInterval(typingInterval);
+  }, []);
+
+  // Animation with GSAP
   useEffect(() => {
     if (!sectionRef.current) return;
 
@@ -35,8 +56,9 @@ export default function HeroSection() {
         <div ref={textRef} className="max-w-4xl mx-auto text-center">
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6">
             <span className="block">Hi, I'm</span>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">
-              John Doe
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500 inline-block min-h-[1.5em]">
+              {displayText}
+              <span className="animate-pulse">|</span>
             </span>
           </h1>
           <p className="text-xl md:text-2xl text-muted-foreground mb-10">
