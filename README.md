@@ -56,8 +56,8 @@ Pastikan Anda sudah menginstal [Node.js](https://nodejs.org/) (disarankan versi 
 **2. Kloning Repositori**
 
 ```bash
-git clone https://github.com/SahrulRamadhanHardiansyah/glow-scroll-portfolio.git
-cd glow-scroll-portfolio
+git clone https://github.com/SahrulRamadhanHardiansyah/Portfolio.git
+cd Portfolio
 ```
 
 **3. Instalasi Dependensi**
