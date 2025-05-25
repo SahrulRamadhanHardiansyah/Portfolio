@@ -87,6 +87,6 @@ RESEND_API_KEY=re_xxxxxxxxxxxxxxx
 
       - Buka Terminal 1, jalankan backend: `node server.js`
       - Buka Terminal 2, jalankan frontend: `npm run dev`
-        *(Catatan: Cara ini memerlukan file `server.js` dan modifikasi pada URL `Workspace` seperti yang telah kita diskusikan)*.
+        *(Catatan: Cara ini memerlukan file `server.js` dan modifikasi pada URL `Workspace`)*.
 
 -----
