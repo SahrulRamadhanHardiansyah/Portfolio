@@ -9,7 +9,7 @@ export default function FooterSection() {
       <div className="container-custom">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <p className="text-muted-foreground text-sm mb-4 md:mb-0">
-            © {currentYear} John Doe. All rights reserved.
+            © {currentYear} Sahrul Ramadhan. All rights reserved.
           </p>
           
           <p className="flex items-center text-sm text-muted-foreground">

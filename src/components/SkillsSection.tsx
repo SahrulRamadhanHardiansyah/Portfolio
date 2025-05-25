@@ -1,8 +1,7 @@
-
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Code, Database, Layout, PaintBucket, Server } from "lucide-react";
+import { Code, Database, Layout, PaintBucket, Server, MonitorSmartphone, Gamepad2 } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -35,10 +34,7 @@ function SkillCard({ title, description, icon, delay }: SkillCardProps) {
   }, [delay]);
 
   return (
-    <div
-      ref={cardRef}
-      className="bg-card rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow glass glass-dark"
-    >
+    <div ref={cardRef} className="bg-card rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow glass glass-dark">
       <div className="mb-4 text-primary">{icon}</div>
       <h3 className="text-xl font-bold mb-2">{title}</h3>
       <p className="text-muted-foreground">{description}</p>
@@ -70,42 +66,48 @@ export default function SkillsSection() {
   const skills = [
     {
       title: "Frontend Development",
-      description:
-        "React, Vue.js, Next.js, TypeScript, CSS/SCSS, Tailwind CSS, Responsive Design",
+      description: "React, Next.js, TypeScript, CSS/SCSS, Bootstrap, Tailwind CSS, Kotlin, Responsive Design",
       icon: <Layout size={32} />,
     },
     {
       title: "Backend Development",
-      description:
-        "Node.js, Express, Python, Django, RESTful APIs, GraphQL, Authentication",
+      description: "Node.js, Express, Python, RESTful APIs, Authentication",
       icon: <Server size={32} />,
     },
     {
+      title: "Fullstack Web Development",
+      description: "Next.js, Node.js, PHP, Tailwind CSS, HTML, MySQL, and Prisma",
+      icon: <Server size={32} />,
+    },
+    {
+      title: ".NET Development",
+      description: "Web API, Windows Forms App, Console App with C# in Microsoft Visual Studio",
+      icon: <MonitorSmartphone size={32} />,
+    },
+    {
+      title: "Mobile & Game Development",
+      description: "Android app with Kotlin, Game development with Godot",
+      icon: <Gamepad2 size={32} />,
+    },
+    {
       title: "Database Management",
-      description:
-        "MongoDB, PostgreSQL, MySQL, Redis, Firebase, Data Modeling, Optimization",
+      description: "MySQL, PostgreSQL, Firebase",
       icon: <Database size={32} />,
     },
     {
       title: "UI/UX Design",
-      description:
-        "Figma, Adobe XD, Wireframing, Prototyping, User-Centered Design",
+      description: "Figma",
       icon: <PaintBucket size={32} />,
     },
     {
       title: "DevOps & Tools",
-      description:
-        "Git, GitHub, Docker, CI/CD, AWS, Vercel, Netlify, Testing, Debugging",
+      description: "Git, GitHub, Docker, Vercel",
       icon: <Code size={32} />,
     },
   ];
 
   return (
-    <section
-      id="skills"
-      ref={sectionRef}
-      className="section bg-background"
-    >
+    <section id="skills" ref={sectionRef} className="section bg-background">
       <div className="container-custom">
         <h2 ref={titleRef} className="text-3xl md:text-4xl font-bold mb-12 text-center">
           My Skills & Expertise
@@ -113,13 +115,7 @@ export default function SkillsSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {skills.map((skill, index) => (
-            <SkillCard
-              key={index}
-              title={skill.title}
-              description={skill.description}
-              icon={skill.icon}
-              delay={index}
-            />
+            <SkillCard key={index} title={skill.title} description={skill.description} icon={skill.icon} delay={index} />
           ))}
         </div>
       </div>
