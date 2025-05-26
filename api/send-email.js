@@ -1,9 +1,6 @@
-// Gunakan 'require' karena ini adalah lingkungan Node.js
-const { Resend } = require("resend");
+import { Resend } from "resend";
 
-// Handler default untuk Vercel Serverless Function
 export default async function handler(request, response) {
-  // Hanya izinkan metode POST
   if (request.method !== "POST") {
     return response.status(405).json({ message: "Method Not Allowed" });
   }
@@ -22,21 +19,21 @@ export default async function handler(request, response) {
       subject: `Pesan Baru dari ${name}: ${subject}`,
       reply_to: email,
       html: `
-        <h1>Pesan Baru dari Website Portfolio</h1>
-        <p><strong>Nama:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Subjek:</strong> ${subject}</p>
-        <hr />
-        <p><strong>Pesan:</strong></p>
-        <p>${message.replace(/\n/g, "<br>")}</p>
+        <div style="font-family: Arial, sans-serif; line-height: 1.6;">
+          <h2>Pesan Baru dari Portfolio Anda</h2>
+          <p><strong>Dari:</strong> ${name}</p>
+          <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
+          <p><strong>Subjek:</strong> ${subject}</p>
+          <hr>
+          <h3>Isi Pesan:</h3>
+          <p>${message.replace(/\n/g, "<br>")}</p>
+        </div>
       `,
     });
 
-    // Kirim respons sukses
     return response.status(200).json({ message: "Message sent successfully", data });
   } catch (error) {
     console.error(error);
-    // Kirim respons error
     return response.status(500).json({ message: "Failed to send message" });
   }
 }
