@@ -165,7 +165,7 @@ export default function ProjectsSection() {
       description: "A Python script that utilizes the OpenCV library to detect human faces in images or a live video stream.",
       tags: ["Python", "OpenCV"],
       image: "/face-detection.png",
-      githubUrl: "https://github.com/SahrulRamadhanHardiansyah/Face-detection",
+      githubUrl: "https://github.com/SahrulRamadhanHardiansyah/Aplikasi-Konversi-Suhu",
       liveUrl: "#",
       category: "Others",
     },
