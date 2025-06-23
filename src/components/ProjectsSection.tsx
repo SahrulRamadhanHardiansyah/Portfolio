@@ -358,6 +358,33 @@ export default function ProjectsSection() {
       liveUrl: "#",
       category: "Website",
     },
+    {
+      title: "GSAP Spylt Website",
+      description: "A clone website of www.spylt.com for GSAP learning.",
+      tags: ["Next.js", "CSS", "GSAP", "ScrollTrigger", "ScrollSmoother"],
+      image: "/gsap-spylt-website.png",
+      githubUrl: "https://github.com/SahrulRamadhanHardiansyah/gsap-spylt-website",
+      liveUrl: "#",
+      category: "Website",
+    },
+    {
+      title: "Gemini Chatbot",
+      description: "A chatbot web application project built using Next.js. The application is powered by Google Gemini AI model, and uses Supabase as a complete backend.",
+      tags: ["Next.js", "TypeScript", "Tailwind CSS", "Supabase", "Google", "Github"],
+      image: "/gemini-supabase-chatbot.png",
+      githubUrl: "https://github.com/SahrulRamadhanHardiansyah/gemini-supabase-chatbot",
+      liveUrl: "#",
+      category: "Website",
+    },
+    {
+      title: "PIN Registration",
+      description: "This website is a ticket-based queuing system for collecting SMA/SMK entrance PINs.",
+      tags: ["React", "Vite", "Inertia", "Tailwind CSS", "Laravel", "MySQL"],
+      image: "/pin-registration.png",
+      githubUrl: "https://github.com/SahrulRamadhanHardiansyah/pin-registration",
+      liveUrl: "#",
+      category: "Website",
+    },
   ];
 
   const filteredProjects = activeFilter === "All" ? projects : projects.filter((project) => project.category === activeFilter);
